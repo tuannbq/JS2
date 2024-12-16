@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài tập JS</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <h1> BÀI TẬP JS </h1>
+    <div class="container">
+        <div class="sidebar">
+            <button class="button" onclick="showExercise('bai1')">Bài 1</button>
+            <button class="button" onclick="showExercise('bai2')">Bài 2</button>
+            <button class="button" onclick="showExercise('bai3')">Bài 3</button>
+            <button class="button" onclick="showExercise('bai4')">Bài 4</button>
+        </div>
+        <div class="content">
+            <div class="exercise" id="bai1">
+                <h2>Bài 1: Quản lý tuyển sinh</h2>
+                <label for="diemChuan">Điểm chuẩn:</label>
+                <input type="number" id="diemChuan" name="diemChuan"><br><br>
+                <label for="diemMon1">Điểm môn 1:</label>
+                <input type="number" id="diemMon1" name="diemMon1"><br><br>
+                <label for="diemMon2">Điểm môn 2:</label>
+                <input type="number" id="diemMon2" name="diemMon2"><br><br>
+                <label for="diemMon3">Điểm môn 3:</label>
+                <input type="number" id="diemMon3" name="diemMon3"><br><br>
+                <label for="khuVuc">Khu vực:</label>
+                <select id="khuVuc" name="khuVuc">
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="X">X</option>
+                </select><br><br>
+                <label for="doiTuong">Đối tượng:</label>
+                <select id="doiTuong" name="doiTuong">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="0">0</option>
+                </select><br><br>
+                <button onclick="kiemTra()">Kiểm tra</button>
+                <p id="ketQua"></p>
+
+                <script>
+                    function kiemTra() {
+                        var diemChuan = parseFloat(document.getElementById("diemChuan").value);
+                        var diemMon1 = parseFloat(document.getElementById("diemMon1").value);
+                        var diemMon2 = parseFloat(document.getElementById("diemMon2").value);
+                        var diemMon3 = parseFloat(document.getElementById("diemMon3").value);
+                        var khuVuc = document.getElementById("khuVuc").value.toUpperCase();
+                        var doiTuong = parseInt(document.getElementById("doiTuong").value);
+
+                        var diemUuTienKhuVuc = 0;
+                        if (khuVuc === 'A') {
+                            diemUuTienKhuVuc = 2;
+                        } else if (khuVuc === 'B') {
+                            diemUuTienKhuVuc = 1;
+                        } else if (khuVuc === 'C') {
+                            diemUuTienKhuVuc = 0.5;
+                        }
+
+                        var diemUuTienDoiTuong = 0;
+                        if (doiTuong === 1) {
+                            diemUuTienDoiTuong = 2.5;
+                        } else if (doiTuong === 2) {
+                            diemUuTienDoiTuong = 1.5;
+                        } else if (doiTuong === 3) {
+                            diemUuTienDoiTuong = 1;
+                        }
+
+                        var diemTongKet = diemMon1 + diemMon2 + diemMon3 + diemUuTienKhuVuc + diemUuTienDoiTuong;
+
+                        var ketQua = "";
+                        if (diemTongKet >= diemChuan && diemMon1 > 0 && diemMon2 > 0 && diemMon3 > 0) {
+                            ketQua = "Thí sinh trúng tuyển! Điểm tổng: " + diemTongKet;
+                        } else {
+                            ketQua = "Thí sinh không trúng tuyển. Điểm tổng: " + diemTongKet;
+                        }
+                        document.getElementById("ketQua").innerHTML = ketQua;
+                    }
+                </script>
+            </div>
+
+            <div class="exercise" id="bai2">
+                <h2>Bài 2: Tính tiền điện</h2>
+                <div class="input-group">
+                    <label for="ten">Tên:</label>
+                    <input type="text" id="ten" name="ten">
+                </div>
+                <div class="input-group">
+                    <label for="soKw">Số Kw:</label>
+                    <input type="number" id="soKw" name="soKw">
+                </div>
+                <button class="button" onclick="tinhTienDien()">Tính tiền điện</button>
+                <p id="ketQua2"></p>
+
+                <script>
+                    function tinhTienDien() {
+                        var ten = document.getElementById("ten").value;
+                        var soKw = parseFloat(document.getElementById("soKw").value);
+                        var tienDien = 0;
+
+                        if (soKw <= 50) {
+                            tienDien = soKw * 500;
+                        } else if (soKw <= 100) {
+                            tienDien = 50 * 500 + (soKw - 50) * 650;
+                        } else if (soKw <= 150) {
+                            tienDien = 50 * 500 + 50 * 650 + (soKw - 100) * 850;
+                        } else if (soKw <= 200) {
+                            tienDien = 50 * 500 + 50 * 650 + 50 * 850 + (soKw - 150) * 1100;
+                        } else {
+                            tienDien = 50 * 500 + 50 * 650 + 50 * 850 + 50 * 1100 + (soKw - 200) * 1300;
+                        }
+
+                        document.getElementById("ketQua2").innerHTML = "Họ và tên: " + ten + "<br>Số Kw: " + soKw + "<br>Tiền điện: " + tienDien + " đồng";
+                    }
+                </script>
+            </div>
+
+            <div class="exercise" id="bai3">
+                <h2>Bài 3: Tính Thuế Thu Nhập Cá Nhân</h2>
+
+                <form id="taxForm">
+                    <label for="fullName">Họ và tên:</label><br>
+                    <input type="text" id="fullName" name="fullName"><br><br>
+
+                    <label for="annualIncome">Tổng thu nhập năm (triệu VND):</label><br>
+                    <input type="number" id="annualIncome" name="annualIncome"><br><br>
+
+                    <label for="dependents">Số người phụ thuộc:</label><br>
+                    <input type="number" id="dependents" name="dependents"><br><br>
+
+                    <button type="button" onclick="calculateTax()">Tính thuế</button>
+                </form>
+
+                <div id="result"></div>
+
+                <script>
+                    function calculateTax() {
+                        const fullName = document.getElementById("fullName").value;
+                        const annualIncome = parseFloat(document.getElementById("annualIncome").value);
+                        const dependents = parseInt(document.getElementById("dependents").value);
+
+                        let taxableIncome = annualIncome - 4 - dependents * 1.6;
+                        let taxRate = 0;
+                        let taxAmount = 0;
+
+                        if (taxableIncome <= 60) {
+                            taxRate = 0.05;
+                        } else if (taxableIncome <= 120) {
+                            taxRate = 0.1;
+                        } else if (taxableIncome <= 210) {
+                            taxRate = 0.15;
+                        } else if (taxableIncome <= 384) {
+                            taxRate = 0.2;
+                        } else if (taxableIncome <= 624) {
+                            taxRate = 0.25;
+                        } else if (taxableIncome <= 960) {
+                            taxRate = 0.3;
+                        } else {
+                            taxRate = 0.35;
+                        }
+
+                        taxAmount = taxableIncome * taxRate;
+
+                        const resultDiv = document.getElementById("result");
+                        resultDiv.innerHTML = `
+    <h3>Kết quả</h3>
+    <p>Họ và tên: ${fullName}</p>
+    <p>Thu nhập chịu thuế: ${taxableIncome.toFixed(2)} triệu VND</p>
+    <p>Thuế suất: ${taxRate * 100}%</p>
+    <p>Số thuế phải trả: ${taxAmount.toFixed(2)} triệu VND</p>
+  `;
+                    }
+                </script>
+            </div>
+
+            <div class="exercise" id="bai4">
+                <h2>Bài 4: Tính tiền cáp</h2>
+                <form>
+                    <label for="customerId">Mã khách hàng:</label>
+                    <input type="text" id="customerId" name="customerId"><br><br>
+
+                    <label for="customerType">Loại khách hàng:</label>
+                    <select id="customerType" name="customerType" onchange="showConnectionField()">
+                        <option value="business">Doanh nghiệp</option>
+                        <option value="residential">Nhà dân</option>
+                    </select><br><br>
+
+                    <div id="connectionField">
+                        <label for="connections">Số kết nối:</label>
+                        <input type="number" id="connections" name="connections"><br><br>
+                    </div>
+                    <label for="premiumChannels">Số kênh cao cấp:</label>
+                    <input type="number" id="premiumChannels" name="premiumChannels"><br><br>
+
+                    <button type="button" onclick="calculateBill()">Tính tiền</button>
+                    <p id="billResult"></p>
+                </form>
+
+                <script>
+                    function showConnectionField() {
+                        var customerType = document.getElementById("customerType").value;
+                        var connectionField = document.getElementById("connectionField");
+                        if (customerType === "business") {
+                            connectionField.style.display = "block";
+                        } else {
+                            connectionField.style.display = "none";
+                        }
+                    }
+
+                    function calculateBill() {
+                        var customerId = document.getElementById("customerId").value;
+                        var customerType = document.getElementById("customerType").value;
+                        var connections = parseInt(document.getElementById("connections").value);
+                        var premiumChannels = parseInt(document.getElementById("premiumChannels").value);
+                        var bill = 0;
+
+                        if (customerType === "residential") {
+                            bill = 4.5 + 20.5 + (premiumChannels * 7.5);
+                        } else if (customerType === "business") {
+                            if (connections <= 10) {
+                                bill = 15 + 75 + (premiumChannels * 50);
+                            } else {
+                                bill = 15 + 75 + ((connections - 10) * 5) + (premiumChannels * 50);
+                            }
+                        }
+
+                        document.getElementById("billResult").innerHTML = "Tổng tiền cáp: $" + bill;
+                    }
+                </script>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showExercise(exerciseId) {
+            // Hide all exercises
+            var exercises = document.querySelectorAll(".exercise");
+            exercises.forEach(function (exercise) {
+                exercise.classList.remove("active");
+            });
+
+            // Show the selected exercise
+            var selectedExercise = document.getElementById(exerciseId);
+            selectedExercise.classList.add("active");
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+ .container {
+     display: flex;
+     gap: 10px;
+ }
+
+ .sidebar {
+     width: 25%;
+ }
+
+ .content {
+     flex: 1;
+ }
+
+ .button {
+     padding: 10px 20px;
+     background-color: black;
+     color: white;
+     border: none;
+     border-radius: 5px;
+     cursor: pointer;
+ }
+
+ .input-group {
+     display: flex;
+     align-items: center;
+     margin-bottom: 5px;
+ }
+
+ .input-group label {
+     width: 150px;
+ }
+
+ .input-group input,
+ .input-group select {
+     padding: 5px;
+     border: 1px solid #ccc;
+     border-radius: 5px;
+ }
+
+ .exercise {
+     display: none;
+ }
+
+ .exercise.active {
+     display: block;
+ }
